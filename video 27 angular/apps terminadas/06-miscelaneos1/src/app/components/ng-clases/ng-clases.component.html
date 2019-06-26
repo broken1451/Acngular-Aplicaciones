@@ -1,0 +1,42 @@
+
+<div class="container">
+
+  <div [ngClass]="'alert-primary'" class="alert" role="alert">
+    A simple primary alert—check it out! [ngClass]="'alert-primary'"
+  </div>
+  
+  <div [ngClass]="alerta" class="alert " role="alert">
+    A simple primary alert—check it out!  [ngClass]="alerta"
+  </div>
+
+  <button class="btn btn-outline-warning" type="button" (click)="alerta = 'alert-warning'">Warning</button>
+  <button id="botonSuccess" class="btn btn-outline-success " type="button" (click)="alerta = 'alert-success'">Success</button>
+
+  <br><br>
+
+  <h3 [ngClass]="{'text-danger': true, 'text-primary': false}">
+    Hola Mundo [ngClass]='text-danger': true, 'text-primary': false"
+  </h3>
+
+  <h3 [ngClass]="{'text-danger': propiedades.danger, 'text-primary': !propiedades.danger}">
+      Hola Mundo [ngClass]= 'text-danger': propiedades.danger, 'text-primary': !propiedades.danger
+  </h3>
+
+  <button 
+  [ngClass]="{'btn-danger': propiedades.danger, 'btn-primary': !propiedades.danger}"
+   class="btn btn-primary text-dark" type="button" (click)="propiedades.danger = !propiedades.danger">Cambiar color</button>
+
+
+  <hr>
+  <br><br>
+  <h3>Procesos asincronos</h3>
+
+  <button [disabled]='loading' (click)="ejecutar()" class="btn btn-primary" type="button" name="button">
+  <i [ngClass]="{'fa-save': !loading, 'fa-refresh fa-spin': loading}" class="fa"></i>
+  <span *ngIf="!loading"> Guardar Cambios</span>
+  <span *ngIf="loading"> Espere por favor</span>
+  </button>
+
+
+</div>
+
