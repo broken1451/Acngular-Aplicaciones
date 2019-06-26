@@ -1,0 +1,190 @@
+<div class="container">
+  <br>
+  <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Variable</th>
+          <th scope="col">PIPE</th>
+          <th scope="col">Producto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{nombre}}</td>
+          <td> Uppercase</td>
+          <td>{{nombre | uppercase}}</td>
+        </tr>
+
+        <tr>
+          <td>{{nombre}}</td>
+          <td> Lowercase</td>
+          <td>{{nombre | lowercase}}</td>
+        </tr>
+
+        <tr>
+            <td>{{nombre}}</td>
+            <td> Slice:3</td>
+            <td>{{nombre | slice:3}}</td>
+          </tr>
+
+          <tr>
+              <td>{{nombre}}</td>
+              <td> Slice:0:3</td>
+              <td>{{nombre | slice:0:1}}</td>
+            </tr>
+
+            <tr>
+                <td>{{arreglo}}</td>
+                <td> Slice:1:5</td>
+                <td>{{arreglo | slice:1:5}}</td>
+              </tr>
+
+              <tr>
+                  <td>{{PI}}</td>
+                  <td> Number</td>
+                  <td>{{PI | number}}</td>
+              </tr>
+
+              <tr>
+                  <td>{{PI}}</td>
+                  <td> Number:'3.0-0'</td>
+                  <td>{{PI | number:'3.0-0'}}</td>
+              </tr>
+
+
+              <tr>
+                  <td>{{PI}}</td>
+                  <td> Number:'1.0-2'</td>
+                  <td>{{PI | number:'1.0-2'}}</td>
+              </tr>
+
+              <tr>
+                  <td>{{a}}</td>
+                  <td> Percent</td>
+                  <td>{{a | percent}}</td>
+              </tr>
+
+              <tr>
+                  <td>{{a}}</td>
+                  <td> Percent:'2.2-2'</td>
+                  <td>{{a | percent:'2.2-2'}}</td>
+              </tr>
+
+              <tr>
+                  <td>{{salario}}</td>
+                  <td> Currency:'2.2-2'</td>
+                  <td>{{salario | currency}}</td>
+              </tr>
+
+              <tr>
+                  <td>{{salario}}</td>
+                  <td> Currency:'EUR'</td>
+                  <td>{{salario | currency:'EUR'}}</td>
+              </tr>
+
+              <tr>
+                  <td>{{salario}}</td>
+                  <td> Currency:'EUR':true</td>
+                  <td>{{salario | currency:'EUR':true}}</td>
+              </tr>
+
+              <tr>
+                  <td>{{salario}}</td>
+                  <td> Currency:'EUR':true:'4.0-0'</td>
+                  <td>{{salario | currency:'EUR':true:'4.0-0'}}</td>
+              </tr>
+
+              <tr>
+                  <td>{{salario}}</td>
+                  <td> Number:'.2-2'</td>
+                  <td>{{salario | number:'.2-2'}}</td>
+              </tr>
+
+              <tr>
+                  <td>{{valorPromesa}}</td>
+                  <td> Async</td>
+                  <td>{{valorPromesa | async}}</td>
+              </tr>
+
+
+
+              <tr>
+                  <td>{{fecha}}</td>
+                  <td> Date</td>
+                  <td>{{fecha}}</td>
+              </tr>
+
+              <tr>
+                  <td>{{fecha}}</td>
+                  <td> Date:'medium'</td>
+                  <td>{{fecha | date:'medium'}}</td>
+              </tr>
+
+
+              <tr>
+                  <td>{{fecha}}</td>
+                  <td> Date:'MMMM - dd'</td>
+                  <td>{{fecha | date:'MMMM - dd'}}</td>
+              </tr>
+
+
+              <tr>
+                  <td>{{nombre2}}</td>
+                  <td> capitalizado</td>
+                  <td>{{nombre2 | capitalizado}}</td>
+              </tr>
+
+              
+              <tr>
+                  <td>{{nombre2}}</td>
+                  <td> capitalizado: true</td>
+                  <td>{{nombre2 | capitalizado:true}}</td>
+              </tr>
+
+              <tr>
+                  <td>{{nombre2}}</td>
+                  <td> capitalizado: false</td>
+                  <td>{{nombre2 | capitalizado:false}}</td>
+              </tr>
+
+              <tr>
+                  <td>{{nombre}}</td>
+                  <td> 
+                    Password: {{activar}}
+                    <br>
+                    <button (click)="activar = !activar" type="button"
+                    class="btn btn-outline-primary">Activar /  Descactivar</button> 
+                  </td>
+                  <td>{{nombre | password:activar}}</td>
+              </tr>
+      </tbody>
+    </table>
+
+    <h4>Slice</h4>
+    <ul>
+      <li *ngFor="let arr of arreglo | slice:5:20">
+        {{arr}}
+      </li>
+    </ul>
+
+
+    <h4>
+      Json
+    </h4>
+
+  <pre>  {{heroe | json}} </pre>
+
+    <h4>YOUTUBE</h4>
+    <hr>
+    <iframe width="560" height="315" [src]="video | domseguro:'https://www.youtube.com/embed/'" frameborder="0" allowfullscreen></iframe>
+
+</div>
+<br>
+<br>
+<br> 
+<br>
+<br>
+<br>
+<br>
+<br>
+
