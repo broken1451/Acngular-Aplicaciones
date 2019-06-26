@@ -1,0 +1,47 @@
+<div class="container">
+
+<div [ngSwitch]="alerta">
+  
+  <div *ngSwitchCase="'success'">Success</div>
+  <div *ngSwitchCase="'info'">Info</div>
+  <div *ngSwitchCase="'warning'">Warning</div>
+  <div *ngSwitchCase="'dark'">Dark</div>
+  <div *ngSwitchCase="'primary'">Primary</div>
+  <div *ngSwitchDefault>Danger</div>
+
+</div>
+
+</div>
+
+<button type="button" class="btn btn-outline-success mt-4" (click)="alerta = 'success'">Cambiar a success</button>
+
+<button type="button" class="btn btn-outline-dark mt-4" (click)="alerta = 'dark'">Cambiar a dark</button>
+
+<div class="container mt-4" [ngSwitch]="alerta">
+
+    <div *ngSwitchCase="'success'" class="alert alert-success" role="alert">
+        A simple success alert—check it out!
+    </div>
+     
+    <div *ngSwitchCase="'warning'" class="alert alert-warning" role="alert">
+        A simple warning alert—check it out!
+    </div>
+     
+    <div *ngSwitchCase="'info'" class="alert alert-info" role="alert">
+        A simple info alert—check it out!
+    </div>
+
+    <div *ngSwitchCase="'dark'" class="alert alert-dark" role="alert">
+        A simple dark alert—check it out!
+    </div>
+
+    <div *ngSwitchCase="'primary'" class="alert alert-primary" role="alert">
+        A simple primary alert—check it out!
+    </div>
+      
+    <div  *ngSwitchDefault class="alert alert-danger" role="alert">
+           A simple danger alert—check it out!
+    </div>
+
+    
+</div>
