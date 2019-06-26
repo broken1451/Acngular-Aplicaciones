@@ -4,11 +4,12 @@
 
   <div>
 
-    <div class="form-group row">
-      <label class="col-2 col-form-label">Nombre</label>
+    <div class=" form-group row">
+      <label class="col-2 col-form-label ">Nombre</label>
       <div class="col-8">
 
-        <input class="form-control"
+        <input [ngClass]="{'is-invalid': (nombre.errors?.required || nombre.errors?.minlength) && nombre.touched}"
+               class="form-control"
                type="text"
                placeholder="Nombre"
                name="nombre"
@@ -17,11 +18,13 @@
                minlength="6"
                #nombre='ngModel'> 
 
-        <div *ngIf="nombre.errors?.required">
+        <div class="invalid-feedback" 
+            *ngIf="nombre.errors?.required">
           El campo es requerido
         </div>
 
-        <div *ngIf="nombre.errors?.minlength">
+        <div class="invalid-feedback" 
+            *ngIf="nombre.errors?.minlength">
           Por lo menos {{nombre.errors.minlength.requiredLength}} caracteres 
         </div>
 
@@ -32,7 +35,9 @@
       <label class="col-2 col-form-label">Apellido</label>
       <div class="col-8">
 
-        <input required class="form-control"
+        <input [ngClass]="{'is-invalid': apellido.errors?.required  && apellido.touched}"
+               required 
+               class="form-control"
                type="text"
                placeholder="Apellido"
                name="apellido"
@@ -40,7 +45,7 @@
                required
                #apellido='ngModel'>
 
-               <div *ngIf="apellido.errors?.required">
+               <div class="invalid-feedback" *ngIf="apellido.errors?.required">
                 El campo es requerido
               </div>
       </div>
@@ -52,7 +57,8 @@
     <label class="col-2 col-form-label">Correo</label>
     <div class="col-md-8">
 
-      <input class="form-control"
+      <input [ngClass]="{'is-invalid': (correo.errors?.required || correo.errors?.pattern)  && correo.touched}"
+             class="form-control"
              type="email"
              placeholder="Correo electrónico"
              name="correo"
@@ -61,11 +67,13 @@
              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
              #correo='ngModel'>
 
-             <div *ngIf="correo.errors?.required">
+             <div class="invalid-feedback"
+                  *ngIf="correo.errors?.required">
               El campo es requerido
             </div>
 
-            <div *ngIf="correo.errors?.pattern">
+            <div  class="invalid-feedback"
+                  *ngIf="correo.errors?.pattern">
               El campo no es valido debe ser example@correo.com
             </div>
 
@@ -75,7 +83,8 @@
   <div class="form-group row">
     <label class="col-2 col-form-label">&nbsp;</label>
     <div class="input-group col-md-8">
-      <button type="submit" class="btn btn-outline-primary">
+      <button [disabled]='formularioTemplate.invalid'
+              type="submit" class="btn btn-outline-primary">
         Guardar boton
       </button>
 
