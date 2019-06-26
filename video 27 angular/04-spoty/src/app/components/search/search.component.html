@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col">
+      <!-- <input #capturarLaReferenciaLocal type="text" (keyup)='buscar(valor del input)' class="form-control" placeholder="buscar artista"> -->
+    <input style="width: 100%" #termino type="text" (keyup)='buscar(termino.value)' class="form-control" placeholder="buscar artista">
+  </div>
+</div>
+
+
+
+<!-- <div  class="card-columns m-5">
+    <div class="card" *ngFor="let artista of artistas">
+      <img [src]="artista.images | noimage" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{artista.name}}</h5>
+      </div>
+    </div>
+  </div> -->
+
+  <app-loading *ngIf="loading" class="m-5"></app-loading>
+
+  <app-tarjetas *ngIf="!loading" [newSongs]= 'artistas' ></app-tarjetas>
