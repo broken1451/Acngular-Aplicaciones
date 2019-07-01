@@ -1,16 +1,33 @@
-<h4>Formularios <small>data</small></h4>
+<h4>Formularios <small>Data</small></h4>
 <hr>
-<form>
-
-  <div>
+<form [formGroup]="formulario" (ngSubmit)='guardarCambios()'>
+ 
+  <div formGroupName="nombrecompleto">
 
     <div class="form-group row">
       <label class="col-2 col-form-label">Nombre</label>
-      <div class="col-8">
-
-        <input class="form-control"
+      <div class="col-8" >
+<!-- formulario.get('nombre').valid
+  [ngClass]="{'is-invalid': formulario.controls['nombre'].invalid}"
+ -->
+        <input [ngClass]="{'is-invalid': formulario.controls['nombrecompleto'].controls['nombre'].invalid}"
+               class="form-control"
                type="text"
-               placeholder="Nombre">
+               placeholder="Nombre"
+               formControlName="nombre">
+
+          <!-- *ngIf="formulario.controls['nombre'].errors?.required"
+          *ngIf="formulario.get('nombrecompleto.nombre').errors?.required"-->
+          <div class="invalid-feedback"
+               *ngIf="formulario.get('nombrecompleto.nombre').errors?.required">
+           El campo es requerido
+         </div>
+
+         <div class="invalid-feedback"
+              *ngIf="formulario.get('nombrecompleto.nombre').errors?.minlength">
+           Por lo menos 3 caracteres
+        </div>
+
       </div>
     </div>
 
@@ -18,9 +35,17 @@
       <label class="col-2 col-form-label">Apellido</label>
       <div class="col-8">
 
-        <input class="form-control"
+        <input [ngClass]="{'is-invalid': formulario.controls['nombrecompleto'].controls['apellido'].invalid}"
+               class="form-control"
                type="text"
-               placeholder="Apellido">
+               placeholder="Apellido"
+               formControlName="apellido">
+
+          <div class="invalid-feedback"
+              *ngIf="formulario.get('nombrecompleto.apellido').errors?.required">
+           El campo es requerido
+         </div>  
+
       </div>
     </div>
 
@@ -30,9 +55,25 @@
     <label class="col-2 col-form-label">Correo</label>
     <div class="col-md-8">
 
-      <input class="form-control"
+      <input [ngClass]="{'is-invalid': formulario.get('correo').invalid}"
+             class="form-control"
              type="email"
-             placeholder="Correo electrónico">
+             placeholder="Correo electrónico"
+             formControlName="correo">
+      
+       <div class="invalid-feedback"
+             *ngIf="formulario.controls['correo'].errors?.required">
+         El campo es requerido
+       </div>
+
+       <!-- *ngIf="formulario.controls['correo'].errors?.pattern" -->
+       <div  class="invalid-feedback"
+             *ngIf="formulario.get('correo').errors?.pattern">
+         El campo no es valido debe ser example@correo.com
+       </div>
+            
+
+
     </div>
   </div>
 
@@ -41,10 +82,13 @@
   <div class="form-group row">
     <label class="col-2 col-form-label">&nbsp;</label>
     <div class="input-group col-md-8">
-      <button type="submit" class="btn btn-outline-primary">
+      <button  [disabled]= 'formulario.invalid'
+              type="submit" class="btn btn-outline-primary">
         Guardar
       </button>
     </div>
   </div>
+
+  {{formulario.valid}}
 
 </form>

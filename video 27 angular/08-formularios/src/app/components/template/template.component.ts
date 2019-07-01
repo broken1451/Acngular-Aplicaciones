@@ -12,6 +12,7 @@ export class TemplateComponent implements OnInit {
   public paises: any;
   public sexos: any[];
 
+
   constructor() {
     this.usuario = {
       nombre: null,
@@ -31,7 +32,7 @@ export class TemplateComponent implements OnInit {
       nombre: 'USA'
     }];
 
-    this.sexos = ['Hombre' , 'Mujer', 'Otros'];
+    this.sexos = ['Hombre' , 'Mujer', 'Otros', 'Sin Definir'];
 
   }
 
@@ -44,6 +45,7 @@ export class TemplateComponent implements OnInit {
     console.log('formularioTemplate y el valor de la forma: ', formularioTemplate.value);
     console.log('Formulario mandado');
     console.log('this.usuario: ', this.usuario);
+    formularioTemplate.reset();
   }
 
 }
