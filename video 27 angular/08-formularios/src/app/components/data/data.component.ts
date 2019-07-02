@@ -42,20 +42,47 @@ export class DataComponent implements OnInit {
 
     this.formulario = new FormGroup({
 
-      'nombrecompleto': new FormGroup({
+      // 'nombrecompleto': new FormGroup({
+
+      //     'nombre': new FormControl('', [Validators.required,
+      //                                    Validators.minLength(3)]),
+      //     'apellido': new FormControl('', Validators.required)
+
+      // }),
+      // 'correo': new FormControl('', [Validators.required,
+      //                               Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')
+      //                               ])
+
+
+    // 1) manera de setear data:
+    //   'nombrecompleto': new FormGroup({
+
+    //     'nombre': new FormControl(this.usuario.nombrecompleto.nombre , [Validators.required,
+    //                                    Validators.minLength(3)]),
+    //     'apellido': new FormControl(this.usuario.nombrecompleto.apellido , Validators.required)
+
+    // }),
+    // 'correo': new FormControl(this.usuario.correo , [Validators.required,
+    //                               Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')
+    //                               ])
+
+
+    // 2) manera de setear data:
+          'nombrecompleto': new FormGroup({
 
           'nombre': new FormControl('', [Validators.required,
                                          Validators.minLength(3)]),
           'apellido': new FormControl('', Validators.required)
 
       }),
-      'correo': new FormControl('', [Validators.required,
+          'correo': new FormControl('', [Validators.required,
                                     Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')
                                     ])
+
     });
 
 
-
+    this.formulario.setValue(this.usuario);
 
 
   }
@@ -66,6 +93,18 @@ export class DataComponent implements OnInit {
   guardarCambios() {
     console.log('El formulario es: ', this.formulario);
     console.log('El valor del formulario es: ', this.formulario.value);
+
+    // Resetear el formulario
+      // this.formulario.reset();
+    this.formulario.reset({
+        nombrecompleto: {
+          nombre: '',
+          apellido: ''
+        },
+          correo: ''
+      });
+
+    // this.formulario.controls['correo'].setValue('algo@gmail.com');
   }
 
 
