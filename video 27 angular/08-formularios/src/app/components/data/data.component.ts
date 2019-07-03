@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 
 {}
 
@@ -16,6 +16,7 @@ export class DataComponent implements OnInit {
 
   public usuario: any;
 
+
   constructor() {
 
     this.usuario = {
@@ -23,9 +24,9 @@ export class DataComponent implements OnInit {
         nombre: 'Adrian',
         apellido: 'Bravo'
       },
-      correo: 'adrianbravo145@gmail.com'
+      correo: 'adrianbravo145@gmail.com',
+      pasatiempos: []
     };
-
 
     // this.formulario = new FormGroup({
 
@@ -77,13 +78,14 @@ export class DataComponent implements OnInit {
       }),
           'correo': new FormControl('', [Validators.required,
                                     Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')
-                                    ])
+                                    ]),
+          'pasatiempos': new FormArray([
+              new FormControl('', Validators.required)
+          ])
 
     });
 
-
-    this.formulario.setValue(this.usuario);
-
+    // this.formulario.setValue(this.usuario); // setear los valores
 
   }
 
@@ -101,12 +103,27 @@ export class DataComponent implements OnInit {
           nombre: '',
           apellido: ''
         },
-          correo: ''
+          correo: '',
+          pasatiempos: ''
       });
+    (this.formulario.controls['pasatiempos'] as FormArray).clear();
 
     // this.formulario.controls['correo'].setValue('algo@gmail.com');
+  }
+
+  agregarPasatiempo() {
+    (this.formulario.controls['pasatiempos'] as FormArray).push(new FormControl('', Validators.required));
+    // (<FormArray>this.formulario.controls['pasatiempos']).push(new FormControl('comer', Validators.required));
+  }
+
+  deletePasatiempo(i: any) {
+    (this.formulario.controls['pasatiempos'] as FormArray).removeAt(i);
   }
 
 
 
 }
+
+
+
+

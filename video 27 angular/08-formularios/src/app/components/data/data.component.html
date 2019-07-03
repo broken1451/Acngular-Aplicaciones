@@ -72,12 +72,21 @@
          El campo no es valido debe ser example@correo.com
        </div>
             
-
-
     </div>
   </div>
 
 
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Pasatiempo</label>
+    <div class="col-md-4" formArrayName="pasatiempos">
+      <!-- <input type="text" class="form-control" formControlName="primer item del arreglo"> -->
+      <input *ngFor="let pasatiempo of formulario.controls['pasatiempos'].controls; let i=index" 
+             type="text" class="form-control" [formControlName]="i">
+
+            </div>
+            <button type="button" class="btn btn-primary" (click)="agregarPasatiempo()">Nuevo</button>
+            <!-- <button type="button" class="btn btn-primary" (click)="deletePasatiempo(i)">Borrar</button> -->
+          </div>
 
   <div class="form-group row">
     <label class="col-2 col-form-label">&nbsp;</label>
