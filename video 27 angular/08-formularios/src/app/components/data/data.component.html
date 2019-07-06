@@ -44,7 +44,12 @@
           <div class="invalid-feedback"
               *ngIf="formulario.get('nombrecompleto.apellido').errors?.required">
            El campo es requerido
-         </div>  
+         </div> 
+         
+    <div class="invalid-feedback"
+         *ngIf="formulario.get('nombrecompleto.apellido').errors?.noBravo">
+      El apellido no puede ser bravo
+    </div> 
 
       </div>
     </div>
@@ -77,21 +82,101 @@
 
 
   <div class="form-group row">
+      <label class="col-2 col-form-label">Username</label>
+      <div class="col-md-8">
+  
+        <input [ngClass]="{'is-invalid': formulario.get('username').invalid}"
+               class="form-control"
+               type="text"
+               placeholder="Introduzca su username"
+               formControlName="username">
+        
+         <div class="invalid-feedback"
+               *ngIf="formulario.controls['username'].errors?.required">
+           El campo es requerido
+         </div>
+
+   <div class="invalid-feedback"
+         *ngIf="formulario.controls['username'].errors?.existeUsuario">
+     El username ya existe
+   </div>
+  
+              
+      </div>
+    </div>
+
+
+  <div class="form-group row">
+      <label class="col-2 col-form-label">Password</label>
+      <div class="col-md-8">
+  
+        <input [ngClass]="{'is-invalid': formulario.get('password1').invalid}"
+               class="form-control"
+               type="password"
+               placeholder="Introduzca su password"
+               formControlName="password1">
+        
+         <div class="invalid-feedback"
+               *ngIf="formulario.controls['password1'].errors?.required">
+           El campo es requerido
+         </div>
+  
+              
+      </div>
+    </div>
+
+
+  <div class="form-group row">
+      <label class="col-2 col-form-label">Repita password</label>
+      <div class="col-md-8">
+  
+        <input [ngClass]="{'is-invalid': formulario.get('password2').invalid}"
+               class="form-control"
+               type="password"
+              
+               placeholder="Introduzca su password"
+               formControlName="password2">
+        
+         <div class="invalid-feedback"
+               *ngIf="formulario.controls['password2'].errors?.required">
+           El campo es requerido
+         </div>
+  
+         <!-- *ngIf="formulario.controls['correo'].errors?" -->
+         <div  class="invalid-feedback"
+               *ngIf="formulario.get('password2').errors?.noIgual">
+               Las pass no son iguales
+           
+         </div>
+              
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+  <div class="form-group row">
     <label class="col-2 col-form-label">Pasatiempo</label>
     <div class="col-md-4" formArrayName="pasatiempos">
       <!-- <input type="text" class="form-control" formControlName="primer item del arreglo"> -->
       <input *ngFor="let pasatiempo of formulario.controls['pasatiempos'].controls; let i=index" 
              type="text" class="form-control" [formControlName]="i">
 
-            </div>
-            <button type="button" class="btn btn-primary" (click)="agregarPasatiempo()">Nuevo</button>
-            <!-- <button type="button" class="btn btn-primary" (click)="deletePasatiempo(i)">Borrar</button> -->
-          </div>
+    </div>
+        <button type="button" class="btn btn-primary" (click)="agregarPasatiempo()">Nuevo</button>
+        <!-- <button type="button" class="btn btn-primary" (click)="deletePasatiempo(i)">Borrar</button> -->
+  </div>
 
   <div class="form-group row">
     <label class="col-2 col-form-label">&nbsp;</label>
     <div class="input-group col-md-8">
-      <button  [disabled]= 'formulario.invalid'
+      <!-- [disabled]= 'formulario.invalid' -->
+      <button  
               type="submit" class="btn btn-outline-primary">
         Guardar
       </button>
@@ -99,5 +184,6 @@
   </div>
 
   {{formulario.valid}}
-
+  <br>
+  {{formulario.status}}
 </form>
