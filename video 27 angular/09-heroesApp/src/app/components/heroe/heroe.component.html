@@ -49,7 +49,7 @@
         </div>
 
         <div class="form-group">
-            <label>estado:</label>
+            <label>Estado:</label>
 			 <hr>
              <button *ngIf="heroe.vivo"
                       (click)="heroe.vivo = false"
@@ -66,26 +66,17 @@
 		</div>
 		
 
-		<hr>
-		<div class="form-group  text-center">
-			<button [disabled]= "formulario.invalid" type="submit" class="btn btn-primary w-25">
+		<hr >
+		<div  class="form-group  text-center">
+			<button [disabled]='formulario.invalid' type="submit" class="btn btn-primary w-25">
 				<i class="fa fa-save"></i>
 				Guardar
 			</button>  
 		</div>
-
+                
         </form>
     </div>
 </div>
-
-{{heroe}}
-
-
-
-
-
-
-
 
 
 
