@@ -16,6 +16,7 @@ export class ChatComponent implements OnInit {
   @ViewChild('campotexto', {static: true}) campotexto: ElementRef;
 
   public mensaje: string;
+  public elemento: any;
 
   constructor( public chatservice: ChatService) {
     this.mensaje = '';
@@ -24,11 +25,19 @@ export class ChatComponent implements OnInit {
     //     console.log('mensajes del servicio cargarMensaje: ', mensajes);
     // });
 
-    this.chatservice.cargarMensaje().subscribe();
+    this.chatservice.cargarMensaje().subscribe( () => {
+
+      setTimeout( () => {
+        this.elemento.scrollTop = this.elemento.scrollHeight;
+      }, 20);
+    });
+
   }
 
   ngOnInit() {
     console.log(this.campotexto);
+    this.elemento = document.querySelector('#app-mensajes');
+
   }
 
 
@@ -36,12 +45,14 @@ export class ChatComponent implements OnInit {
   enviarMensaje() {
     console.log('this.mensaje: ', this.mensaje);
 
-    if (this.mensaje.length === 0) {
+    if ( this.mensaje.length === 0 ) {
       return;
     }
 
-    this.chatservice.agregarMensaje(this.mensaje).then( () => {
-      console.log('Mensaje Guardado');
+
+
+    this.chatservice.agregarMensaje(this.mensaje).then( (res) => {
+      console.log('Mensaje Enviado: ', res);
       this.mensaje = '';
     }).catch((err) => {
       console.log('Error al enviar el mensaje ', err);

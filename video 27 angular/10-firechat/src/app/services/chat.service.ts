@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 
-// Anggular fire 2
+// Angular fire 2
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
+import * as firebase from 'firebase/app';
 
 // Observables
 import { Observable } from 'rxjs';
@@ -9,6 +12,9 @@ import { map } from 'rxjs/operators';
 
 // Interfaces/Modelos
 import { Mensaje } from '../interfaces/mensaje.interface';
+
+
+
 
 
 {}
@@ -20,11 +26,29 @@ import { Mensaje } from '../interfaces/mensaje.interface';
 })
 export class ChatService {
 
-  public chats: Mensaje[];
   private itemsCollection: AngularFirestoreCollection<Mensaje>;
+  public chats: Mensaje[];
+  public usuario: any;
 
-  constructor(private angularFirestore: AngularFirestore) {
+  constructor(private angularFirestore: AngularFirestore,
+              public angularFireAuth: AngularFireAuth) {
     this.chats = [];
+    this.usuario = {};
+
+    this.angularFireAuth.authState.subscribe( (user) => {
+      console.log('Estado del usuario: ', user);
+
+      if (!user) {
+        return;
+      }
+
+      // se crean las porpiedades en el objeto
+      this.usuario.nombre = user.displayName;
+      this.usuario.imagen = user.photoURL;
+      this.usuario.uid = user.uid;
+
+      console.log('this.usuario: ', this.usuario);
+    });
 
   }
 
@@ -33,10 +57,33 @@ export class ChatService {
     // this.itemsCollection = this.angularFirestore.collection<Mensaje>('chats');
     // return this.itemsCollection.valueChanges();
 
-    this.itemsCollection = this.angularFirestore.collection<Mensaje>('chats');
+    // querys a firebase
+    this.itemsCollection = this.angularFirestore.collection<Mensaje>('chats', ref => ref.orderBy('fecha', 'desc')
+                                                                                        .limit(10));
+
     return this.itemsCollection.valueChanges().pipe( map( (mensajes: Mensaje[]) => {
+      // console.log('mensajes del map de cargarMensaje: ', mensajes[1].fecha);
       console.log('mensajes del map de cargarMensaje: ', mensajes);
-      this.chats = mensajes;
+
+      this.chats = [];
+
+      // Map
+      // mensajes.map(element => {
+      //   this.chats.unshift(element);
+      // });
+
+      // For of
+      // for (const mensaje of mensajes) {
+      //   this.chats.unshift(mensaje);
+      // }
+
+      // ForEach
+      mensajes.forEach(element => {
+        this.chats.unshift(element);
+      });
+
+      // this.chats = mensajes;
+      return this.chats;
     }));
   }
 
@@ -50,6 +97,19 @@ export class ChatService {
 
     return this.itemsCollection.add(mensaje);
   }
+
+
+
+
+
+  login(proveedor: string) {
+    this.angularFireAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+  }
+
+  logout() {
+    this.angularFireAuth.auth.signOut();
+  }
+
 
 
 

@@ -16,12 +16,13 @@
     </div> -->
 
     <div class="text-right" *ngFor="let chat of chatservice.chats">
-        <span class="badge badge-primary">Adrian</span> 
+        <span class="badge badge-primary">
+            <img [src]="chatservice.usuario.imagen" > Adrian</span> 
         <p>{{chat.mensaje}}</p>
     </div>
 
     
-
+    
 
 
 
@@ -30,7 +31,8 @@
 
 
     
-<input #campotexto type="text" [(ngModel)]="mensaje" (keyup.enter)='enviarMensaje()' class="form-control "
+<input  
+        #campotexto type="text" [(ngModel)]="mensaje" (keyup.enter)='enviarMensaje()' class="form-control "
 name="mensaje" id="mensaje" placeholder="Enviar mensaje">
 
 
