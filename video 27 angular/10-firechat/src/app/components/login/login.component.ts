@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+
+// Servicios
 import { ChatService } from '../../services/chat.service';
 
 {}
@@ -22,10 +24,7 @@ export class LoginComponent implements OnInit {
 
   ingresar(proveedor: string) {
     console.log('Proveedor: ', proveedor);
-
     this.chatService.login(proveedor);
-
-
   }
 
 }

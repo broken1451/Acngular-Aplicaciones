@@ -89,13 +89,26 @@ export class ChatService {
 
   agregarMensaje(texto: string) {
     // TODO falta elUID del usuario
-    let mensaje: Mensaje = {
-      nombre: 'demo',
-      mensaje: texto,
-      fecha: new Date().getTime(),
-    };
 
-    return this.itemsCollection.add(mensaje);
+    if (this.usuario) {
+      let mensaje: Mensaje = {
+        nombre: this.usuario.nombre,
+        mensaje: texto,
+        fecha: new Date().getTime(),
+        uid: this.usuario.uid
+      };
+
+      return this.itemsCollection.add(mensaje);
+    } else {
+      let mensaje: Mensaje = {
+        nombre: 'demo',
+        mensaje: texto,
+        fecha: new Date().getTime(),
+      };
+
+      return this.itemsCollection.add(mensaje);
+    }
+
   }
 
 
@@ -103,10 +116,25 @@ export class ChatService {
 
 
   login(proveedor: string) {
-    this.angularFireAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+
+    // if (proveedor === 'Google') {
+    //   this.angularFireAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    // } else if ( proveedor === 'Github' ) {
+    //   this.angularFireAuth.auth.signInWithPopup(new auth.GithubAuthProvider());
+    // } else {
+    //   this.angularFireAuth.auth.signInWithPopup(new auth.FacebookAuthProvider());
+    // }
+
+    if (proveedor === 'Google') {
+      this.angularFireAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    }  else {
+      this.angularFireAuth.auth.signInWithPopup(new auth.GithubAuthProvider());
+    }
+
   }
 
   logout() {
+    this.usuario = {};
     this.angularFireAuth.auth.signOut();
   }
 

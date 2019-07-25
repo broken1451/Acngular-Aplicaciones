@@ -26,7 +26,6 @@ export class ChatComponent implements OnInit {
     // });
 
     this.chatservice.cargarMensaje().subscribe( () => {
-
       setTimeout( () => {
         this.elemento.scrollTop = this.elemento.scrollHeight;
       }, 20);
