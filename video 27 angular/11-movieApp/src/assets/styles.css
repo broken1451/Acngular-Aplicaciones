@@ -19,6 +19,7 @@ body{
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  
 }
 
 .pic-titulo{
@@ -68,4 +69,13 @@ body{
 
 .fadeIn {
   animation-name: fadeIn;
+}
+
+
+i[class^="icon-"], [class*=" icon-"]{  
+  display: inline-block;
+  width: 100%;
+  text-align:center;
+  justify-content: center !important;
+  align-items: center !important;
 }

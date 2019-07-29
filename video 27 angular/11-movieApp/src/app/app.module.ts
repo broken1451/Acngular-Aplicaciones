@@ -11,13 +11,15 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BusquedaComponent } from './components/busqueda/busqueda.component';
 import { HomeComponent } from './components/home/home.component';
+import { GaleriaComponent } from './components/home/galeria.component';
+import { PeliculaComponent } from './components/pelicula/pelicula.component';
 
+// Pipes
+import { PeliculaImagenPipe } from './pipes/pelicula-imagen.pipe';
 
 // Servicios
 import { PeliService } from './services/peli.service';
-import { PeliculaComponent } from './components/pelicula/pelicula.component';
-import { PeliculaImagenPipe } from './pipes/pelicula-imagen.pipe';
-import { GaleriaComponent } from './components/home/galeria.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 
 
@@ -33,7 +35,8 @@ import { GaleriaComponent } from './components/home/galeria.component';
     HomeComponent,
     PeliculaComponent,
     PeliculaImagenPipe,
-    GaleriaComponent
+    GaleriaComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

@@ -11,10 +11,12 @@ export class PeliService {
 
   public apiKey: string;
   public urlMoviedb: string;
+  public pelicula: any[];
 
   constructor(private httpClient: HttpClient) {
     this.apiKey = '8ee813186f1978b4c769a17cf5c144ab';
     this.urlMoviedb = 'https://api.themoviedb.org/3';
+    this.pelicula = [];
   }
 
   getPopulares() {
@@ -33,9 +35,10 @@ export class PeliService {
 
     return this.httpClient.jsonp(url, 'JSONP_CALLBACK');
   //   .pipe( map( (res) => {
+  //     this.peliculas = res.results
   //     console.log(res);
+  //     return res.results
   //  }));
-
 
   }
 
@@ -62,6 +65,10 @@ export class PeliService {
 
  }
 
+ getPelicula(id: string) {
+    let url = `${ this.urlMoviedb }/movie/${ id }?&api_key=${ this.apiKey }&language=es&callback=JSONP_CALLBACK`;
+    return this.httpClient.jsonp(url, 'JSONP_CALLBACK');
+ }
 
 
 

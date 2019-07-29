@@ -11,10 +11,12 @@ import { PeliculaComponent } from './components/pelicula/pelicula.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'pelicula', component: PeliculaComponent },
   { path: 'buscar', component: BusquedaComponent },
+  { path: 'buscar/:textoInput', component: BusquedaComponent },
+  { path: 'pelicula/:id/:pag', component: PeliculaComponent },
+  { path: 'pelicula/:id/:pag/:parametroBusqueda', component: PeliculaComponent },
   // { path: 'path4', component: Name4Component },
-  { path: '**', component: HomeComponent },
+  { path: '**', pathMatch: 'full', component: HomeComponent },
 ];
 
 @NgModule({

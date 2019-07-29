@@ -12,6 +12,8 @@ export class GaleriaComponent implements OnInit {
   @Input('titulo') titulo;
 
   constructor() {
+    console.log('this.peliculas: ', this.peliculas);
+    console.log('this.titulo: ', this.titulo);
   }
 
   ngOnInit() {

@@ -1,1 +1,39 @@
-<p>busqueda works!</p>
+<div class="container main-container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Buscar</label>
+                <input type="text" 
+                       name="buscar" 
+                       placeholder="Buscar pelicula"
+                       [(ngModel)]="buscar"
+                       class="form-control"
+                       (keyup.enter)='buscarPeli()'>  
+            </div>
+        </div>
+    </div>
+
+
+    <app-loading *ngIf="loading"  class="mt-5 mb-5 centrarIcono"></app-loading>
+<div class="row mt-3 animated fadeIn slow">
+
+        <div class="card-columns">
+
+                <div class="card" *ngFor="let peli of pelicula">
+                  <img [src]="peli | peliculaImagen" class="card-img-top" [alt]="peli.original_title">
+                  <div class="card-body">
+                    <h5 class="card-title">{{peli.original_title}}</h5>
+                    <p class="card-text text-justify">{{peli.overview | slice:0:250}}...</p>
+                    <!-- [routerLink]="['/pelicula', peli.id, 'pagina', parametro de busqueda]" -->
+                    <button [routerLink]="['/pelicula', peli.id, 'buscar', buscar]"  
+                            type="button" class="btn btn-outline-primary btn-block">
+                      Ver mas...
+                    </button>
+                  </div>
+                </div>
+
+        </div>
+</div>
+
+</div>
