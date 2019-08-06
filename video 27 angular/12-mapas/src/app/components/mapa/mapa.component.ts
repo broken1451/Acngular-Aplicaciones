@@ -3,6 +3,14 @@ import { Component, OnInit } from '@angular/core';
 // Modelo
 import { Marcador } from '../../models/marcador.class';
 
+
+// Angular Material
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+
+// Componentes
+import { MapaEditarComponent } from './mapa-editar.component';
+
 {}
 
 
@@ -17,7 +25,7 @@ export class MapaComponent implements OnInit {
  public lng: number;
  public marcadores: Marcador[];
 
-  constructor() {
+  constructor( private snackBar: MatSnackBar, public dialog: MatDialog ) {
 
     this.marcadores = [];
     this.lat = 51.678418;
@@ -42,7 +50,45 @@ export class MapaComponent implements OnInit {
     const nuevoMarcador = new Marcador( coords.lat, coords.lng );
     this.marcadores.push(nuevoMarcador);
     this.guardarStorage();
+    this.snackBar.open('Marcador agregado', 'Cerrar', {duration: 3000});
     console.log('evento de agregarMarcador():', evento);
+  }
+
+  borrarMarcador(i: number) {
+    console.log('el valor de i: ', i);
+    this.marcadores.splice(i, 1);
+    this.guardarStorage();
+    this.snackBar.open('Marcador borrado', 'Cerrar', {duration: 3000});
+  }
+
+  editarMarcador(marcador: Marcador ) {
+    // const dialogRef = this.dialog.open(NombreDelComponenteQueQueremosQueRendediseDentroDelModal, {
+    // Opciones:
+    //   width: '250px',
+    //   informacion enviada al modal
+    //   data: {name: this.name, animal: this.animal}
+    // });
+
+    const dialogRef = this.dialog.open(MapaEditarComponent, {
+      width: '250px',
+      data: {titulo: marcador.titulo, descripcion: marcador.descripcion}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Resultado que viene del modal');
+      console.log('result del dialogRef:', result);
+
+      if (!result) {
+        return;
+      }
+
+      marcador.titulo = result.Titulo;
+      marcador.descripcion = result.Descripcion;
+      this.guardarStorage();
+      this.snackBar.open('Marcador actualizado', 'Cerrar', {duration: 3000});
+    });
+
+
   }
 
 
